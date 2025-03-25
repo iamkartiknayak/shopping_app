@@ -42,14 +42,16 @@ class _CataloguePageState extends ConsumerState<CataloguePage> {
                 right: 8.0,
                 child: IgnorePointer(
                   child: Container(
+                    height: 20.0,
+                    width: 20.0,
                     decoration: BoxDecoration(
                       color: kAccentColor,
                       shape: BoxShape.circle,
                     ),
-                    padding: EdgeInsets.all(4.0),
+                    padding: EdgeInsets.all(2.0),
                     child: Text(
                       "${cartItems.length}",
-                      style: TextStyle(color: Colors.white, fontSize: 12.0),
+                      style: TextStyle(color: Colors.white, fontSize: 10.0),
                       textAlign: TextAlign.center,
                     ),
                   ),
