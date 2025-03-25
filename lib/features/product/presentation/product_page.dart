@@ -2,11 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:intl/intl.dart';
 
 import 'package:shopping_app/core/constants.dart';
 import 'package:shopping_app/features/catalogue/data/models/product_model.dart';
 import 'package:shopping_app/features/product/presentation/widgets/custom_button.dart';
+import 'package:shopping_app/features/product/presentation/widgets/customer_review_widget.dart';
 import 'package:shopping_app/features/product/presentation/widgets/image_slider.dart';
 import 'package:shopping_app/features/product/application/image_slider_notifier.dart';
 import 'package:shopping_app/features/product/presentation/widgets/image_index_indicator.dart';
@@ -162,7 +162,7 @@ class ProductPage extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   textBaseline: TextBaseline.alphabetic,
                   children: [
-                    _buildStarRating(product.reviewAverage),
+                    buildStarRating(product.reviewAverage),
                     SizedBox(width: 4.0),
                     Text(
                       "${product.reviewAverage.ceil()} out of 5",
@@ -176,55 +176,7 @@ class ProductPage extends ConsumerWidget {
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17.0),
                 ),
                 SizedBox(height: 12.0),
-
-                Column(
-                  children:
-                      product.reviews.map<Widget>((review) {
-                        return Container(
-                          margin: EdgeInsets.only(bottom: 16.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Colors.grey.shade400,
-                                    ),
-                                    padding: EdgeInsets.all(3.0),
-                                    child: Icon(Icons.person_2),
-                                  ),
-                                  SizedBox(width: 8.0),
-                                  Text(
-                                    review.reviewerName,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(height: 6.0),
-                              _buildStarRating(
-                                review.rating.toDouble(),
-                                size: 18.0,
-                              ),
-                              SizedBox(height: 3.0),
-                              Text(
-                                "Reviewed in India on ${_formatDate(review.date)}",
-                                style: TextStyle(
-                                  fontSize: 12.0,
-                                  color: Colors.grey.shade700,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              SizedBox(height: 6.0),
-                              Text(review.comment),
-                            ],
-                          ),
-                        );
-                      }).toList(),
-                ),
+                CustomerReviewWidget(product: product),
               ],
             ),
           ),
@@ -234,7 +186,7 @@ class ProductPage extends ConsumerWidget {
   }
 }
 
-Row _buildStarRating(double rating, {double size = 26}) {
+Row buildStarRating(double rating, {double size = 26}) {
   int totalStars = rating.ceil();
 
   return Row(
@@ -245,11 +197,6 @@ Row _buildStarRating(double rating, {double size = 26}) {
           : Icon(Icons.star_outline, size: size, color: Colors.grey);
     }),
   );
-}
-
-String _formatDate(String isoDate) {
-  DateTime dateTime = DateTime.parse(isoDate);
-  return DateFormat("d MMMM y").format(dateTime);
 }
 
 Padding _buildLabel(String label) => Padding(
