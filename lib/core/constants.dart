@@ -22,4 +22,4 @@ final kAccentColor = Color(0xFFE91E63);
 
 final kBackgroundColor = Color(0xFFFFEBEE);
 
-final kShimmerChildrenColor = Color(0xFFF5F5F5);
+final kShimmerChildrenColor = Colors.grey.shade300;
