@@ -7,6 +7,7 @@ import 'package:shopping_app/core/constants.dart';
 import 'package:shopping_app/features/cart/application/cart_notifier.dart';
 import 'package:shopping_app/features/catalogue/data/models/product_model.dart';
 import 'package:shopping_app/features/catalogue/presentation/widgets/add_to_cart_button.dart';
+import 'package:shopping_app/features/product/presentation/product_page.dart';
 
 class ProductCard extends ConsumerWidget {
   const ProductCard({super.key, required this.product});
@@ -15,71 +16,80 @@ class ProductCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Container(
-      color: Colors.white,
-      child: Column(
-        children: [
-          Stack(
-            children: [
-              Image.network(
-                product.thumbnail,
-                fit: BoxFit.contain,
-                height: 180.0,
-              ),
-              AddToCartButton(
-                onTap: () {
-                  ref.read(cartProvider.notifier).addToCart(product);
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      duration: Duration(seconds: 2),
-                      backgroundColor: kBackgroundColor,
-                      content: Text.rich(
-                        TextSpan(
-                          text: product.title,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          ),
-                          children: [
-                            TextSpan(
-                              text: " added to cart!",
-                              style: TextStyle(fontWeight: FontWeight.normal),
+    return InkWell(
+      onTap:
+          () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ProductPage(product: product),
+            ),
+          ),
+      child: Container(
+        color: Colors.white,
+        child: Column(
+          children: [
+            Stack(
+              children: [
+                Image.network(
+                  product.thumbnail,
+                  fit: BoxFit.contain,
+                  height: 180.0,
+                ),
+                AddToCartButton(
+                  onTap: () {
+                    ref.read(cartProvider.notifier).addToCart(product);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        duration: Duration(seconds: 2),
+                        backgroundColor: kBackgroundColor,
+                        content: Text.rich(
+                          TextSpan(
+                            text: product.title,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
                             ),
-                          ],
+                            children: [
+                              TextSpan(
+                                text: " added to cart!",
+                                style: TextStyle(fontWeight: FontWeight.normal),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  );
-                },
-              ),
-            ],
-          ),
-          SizedBox(height: 4.0),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Text(
-                  product.title,
-                  overflow: TextOverflow.ellipsis,
-                  style: kProductTitleStyle,
-                ),
-                SizedBox(height: 2.0),
-                Text(product.brand, style: TextStyle(fontSize: 12.0)),
-                SizedBox(height: 10.0),
-                ProductPriceTextSpan(
-                  originalPrice: product.price,
-                  discountedPrice: product.discountedPrice,
-                ),
-                SizedBox(height: 2.0),
-                ProductDiscountTextSpan(
-                  discountPercentage: product.discountPercentage,
+                    );
+                  },
                 ),
               ],
             ),
-          ),
-        ],
+            SizedBox(height: 4.0),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text(
+                    product.title,
+                    overflow: TextOverflow.ellipsis,
+                    style: kProductTitleStyle,
+                  ),
+                  SizedBox(height: 2.0),
+                  Text(product.brand, style: TextStyle(fontSize: 12.0)),
+                  SizedBox(height: 10.0),
+                  ProductPriceTextSpan(
+                    originalPrice: product.price,
+                    discountedPrice: product.discountedPrice,
+                  ),
+                  SizedBox(height: 2.0),
+                  ProductDiscountTextSpan(
+                    discountPercentage: product.discountPercentage,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
