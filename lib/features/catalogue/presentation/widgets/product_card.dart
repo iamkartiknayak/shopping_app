@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:shopping_app/common/product_discount_textspan.dart';
 import 'package:shopping_app/common/product_price_textspan.dart';
+import 'package:shopping_app/core/constants.dart';
 import 'package:shopping_app/features/catalogue/data/models/product_model.dart';
 import 'package:shopping_app/features/catalogue/presentation/widgets/add_to_cart_button.dart';
 
@@ -34,7 +35,7 @@ class ProductCard extends StatelessWidget {
                 Text(
                   product.title,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
+                  style: kProductTitleStyle,
                 ),
                 SizedBox(height: 2.0),
                 Text(product.brand, style: TextStyle(fontSize: 12.0)),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:shopping_app/core/constants.dart';
+
 class ProductPriceTextSpan extends StatelessWidget {
   const ProductPriceTextSpan({
     super.key,
@@ -18,21 +20,12 @@ class ProductPriceTextSpan extends StatelessWidget {
         children: [
           TextSpan(
             text: '\$$originalPrice ',
-            style: TextStyle(
-              color: Colors.grey,
-              decoration: TextDecoration.lineThrough,
-              decorationColor: Colors.grey.shade600,
-              fontSize: 12.0,
-            ),
+            style: kProductOriginalPriceStyle,
           ),
           TextSpan(text: ' '),
           TextSpan(
             text: '\$${discountedPrice.toStringAsFixed(2)}',
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 14.0,
-              fontWeight: FontWeight.bold,
-            ),
+            style: kProductDiscountedPriceStyle,
           ),
         ],
       ),
