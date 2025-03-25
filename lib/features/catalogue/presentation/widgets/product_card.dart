@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:shopping_app/common/product_discount_textspan.dart';
+import 'package:shopping_app/common/product_price_textspan.dart';
 import 'package:shopping_app/features/catalogue/data/models/product_model.dart';
 import 'package:shopping_app/features/catalogue/presentation/widgets/add_to_cart_button.dart';
 
@@ -37,44 +39,13 @@ class ProductCard extends StatelessWidget {
                 SizedBox(height: 2.0),
                 Text(product.brand, style: TextStyle(fontSize: 12.0)),
                 SizedBox(height: 10.0),
-                RichText(
-                  textAlign: TextAlign.start,
-                  text: TextSpan(
-                    children: [
-                      TextSpan(
-                        text: '\$${product.price} ',
-                        style: TextStyle(
-                          color: Colors.grey,
-                          decoration: TextDecoration.lineThrough,
-                          decorationColor: Colors.grey.shade600,
-                          fontSize: 12.0,
-                        ),
-                      ),
-                      TextSpan(text: ' '),
-                      TextSpan(
-                        text: '\$${product.discountedPrice.toStringAsFixed(2)}',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
+                ProductPriceTextSpan(
+                  originalPrice: product.price,
+                  discountedPrice: product.discountedPrice,
                 ),
                 SizedBox(height: 2.0),
-                RichText(
-                  textAlign: TextAlign.start,
-                  text: TextSpan(
-                    style: TextStyle(color: Colors.pink),
-                    children: [
-                      TextSpan(
-                        text: '${product.discountPercentage}% ',
-                        style: TextStyle(fontSize: 13.0),
-                      ),
-                      TextSpan(text: 'OFF'),
-                    ],
-                  ),
+                ProductDiscountTextSpan(
+                  discountPercentage: product.discountPercentage,
                 ),
               ],
             ),
