@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:shopping_app/features/catalogue/presentation/catalogue_page.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -15,7 +17,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.pink.shade300),
       ),
-      home: Scaffold(),
+      // darkTheme: ThemeData.dark(),
+      home: CataloguePage(),
     );
   }
 }
