@@ -5,6 +5,7 @@ import 'package:shopping_app/core/constants.dart';
 import 'package:shopping_app/features/cart/application/cart_notifier.dart';
 import 'package:shopping_app/features/catalogue/application/product_notifier.dart';
 import 'package:shopping_app/features/catalogue/presentation/widgets/cart_button.dart';
+import 'package:shopping_app/features/catalogue/presentation/widgets/catalogue_item_shimmer.dart';
 import 'package:shopping_app/features/catalogue/presentation/widgets/product_card.dart';
 
 class CataloguePage extends ConsumerStatefulWidget {
@@ -42,28 +43,38 @@ class _CataloguePageState extends ConsumerState<CataloguePage> {
               (data) => GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  childAspectRatio: 0.72,
+                  childAspectRatio: 0.71,
                   mainAxisSpacing: 8.0,
                   crossAxisSpacing: 6.0,
                 ),
                 itemCount: data.length + 1,
                 itemBuilder: (context, index) {
                   if (index == data.length) {
-                    return Center(
-                      child: Padding(
-                        padding: EdgeInsets.all(10.0),
-                        child: CircularProgressIndicator(),
-                      ),
-                    );
+                    return CatalogueItemShimmer();
                   }
                   final product = data[index];
                   return ProductCard(product: product);
                 },
               ),
-          loading: () => const Center(child: CircularProgressIndicator()),
+          loading: () => _buildShimmerItems(),
           error: (e, stack) => Center(child: Text("Error: $e")),
         ),
       ),
+    );
+  }
+
+  GridView _buildShimmerItems() {
+    return GridView.builder(
+      itemCount: 8,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        childAspectRatio: 0.71,
+        mainAxisSpacing: 8.0,
+        crossAxisSpacing: 6.0,
+      ),
+      itemBuilder: (context, index) {
+        return const CatalogueItemShimmer();
+      },
     );
   }
 }
