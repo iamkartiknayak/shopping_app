@@ -8,8 +8,10 @@ class ProductRepository {
 
   ProductRepository({required this.apiService});
 
-  Future<List<Product>> fetchProducts() async {
-    final response = await apiService.get("https://dummyjson.com/products");
+  Future<List<Product>> fetchProducts(int page, int limit) async {
+    final response = await apiService.get(
+      "https://dummyjson.com/products?skip=${page * limit}&limit=$limit",
+    );
 
     final data = jsonDecode(response);
     return (data['products'] as List).map((e) => Product.fromJson(e)).toList();

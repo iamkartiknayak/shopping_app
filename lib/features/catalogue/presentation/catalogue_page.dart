@@ -61,21 +61,41 @@ class _CataloguePageState extends ConsumerState<CataloguePage> {
           ),
         ],
       ),
-      body: products.when(
-        data:
-            (data) => GridView.builder(
-              itemCount: data.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 0.72,
-                mainAxisSpacing: 8.0,
-                crossAxisSpacing: 6.0,
+      body: NotificationListener<ScrollNotification>(
+        onNotification: (scrollInfo) {
+          if (ref
+              .read(productNotifierProvider.notifier)
+              .shouldFetchMore(scrollInfo)) {
+            ref.read(productNotifierProvider.notifier).fetchProducts();
+          }
+          return false;
+        },
+        child: products.when(
+          data:
+              (data) => GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 0.72,
+                  mainAxisSpacing: 8.0,
+                  crossAxisSpacing: 6.0,
+                ),
+                itemCount: data.length + 1,
+                itemBuilder: (context, index) {
+                  if (index == data.length) {
+                    return Center(
+                      child: Padding(
+                        padding: EdgeInsets.all(10.0),
+                        child: CircularProgressIndicator(),
+                      ),
+                    );
+                  }
+                  final product = data[index];
+                  return ProductCard(product: product);
+                },
               ),
-              itemBuilder:
-                  (context, index) => ProductCard(product: data[index]),
-            ),
-        loading: () => Center(child: CircularProgressIndicator()),
-        error: (error, _) => Center(child: Text("Error: $error")),
+          loading: () => const Center(child: CircularProgressIndicator()),
+          error: (e, stack) => Center(child: Text("Error: $e")),
+        ),
       ),
     );
   }

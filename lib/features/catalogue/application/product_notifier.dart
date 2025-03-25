@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../data/models/product_model.dart';
 import '../data/repositories/product_repository.dart';
@@ -18,6 +19,10 @@ class ProductNotifier extends StateNotifier<AsyncValue<List<Product>>> {
   final ProductRepository repository;
 
   bool _isFetching = false;
+  int _page = 0;
+  final int _limit = 8;
+
+  bool get isFetching => _isFetching;
 
   ProductNotifier(this.repository) : super(const AsyncValue.loading()) {
     fetchProducts(initialLoad: true);
@@ -28,7 +33,7 @@ class ProductNotifier extends StateNotifier<AsyncValue<List<Product>>> {
     _isFetching = true;
 
     try {
-      final newProducts = await repository.fetchProducts();
+      final newProducts = await repository.fetchProducts(_page, _limit);
 
       if (initialLoad) {
         state = AsyncValue.data(newProducts);
@@ -37,10 +42,16 @@ class ProductNotifier extends StateNotifier<AsyncValue<List<Product>>> {
           (prevProducts) => [...prevProducts, ...newProducts],
         );
       }
+      _page++;
     } catch (e) {
       state = AsyncValue.error(e, StackTrace.current);
     }
 
     _isFetching = false;
+  }
+
+  bool shouldFetchMore(ScrollNotification scrollInfo) {
+    return scrollInfo.metrics.pixels >=
+        (scrollInfo.metrics.maxScrollExtent - 100);
   }
 }
