@@ -54,6 +54,7 @@ class ProductCard extends ConsumerWidget {
               ),
             ],
           ),
+          SizedBox(height: 4.0),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 10.0),
             child: Column(
