@@ -26,7 +26,7 @@ class CartNotifier extends StateNotifier<Map<Product, int>> {
 
   double get totalPrice => state.entries.fold(
     0,
-    (sum, entry) => sum + (entry.key.price * entry.value),
+    (sum, entry) => sum + (entry.key.discountedPrice * entry.value),
   );
 }
 
