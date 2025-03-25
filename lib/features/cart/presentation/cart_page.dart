@@ -17,7 +17,7 @@ class CartPage extends ConsumerWidget {
     final cartNotifier = ref.read(cartProvider.notifier);
 
     return Scaffold(
-      backgroundColor: Color(0xFFFFEBEE),
+      backgroundColor: kBackgroundColor,
       appBar: AppBar(title: Text("Cart"), centerTitle: true),
       body: Stack(
         alignment: Alignment.bottomCenter,

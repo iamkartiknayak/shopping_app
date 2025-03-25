@@ -19,3 +19,5 @@ final kProductDiscountedPriceStyle = TextStyle(
 );
 
 final kAccentColor = Color(0xFFE91E63);
+
+final kBackgroundColor = Color(0xFFFFEBEE);
