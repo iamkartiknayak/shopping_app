@@ -9,7 +9,7 @@ import 'package:shimmer/shimmer.dart';
 import 'package:shopping_app/core/constants.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:shopping_app/features/catalogue/data/models/product_model.dart';
-import 'package:shopping_app/features/product/presentation/application/image_slider_notifier.dart';
+import 'package:shopping_app/features/product/application/image_slider_notifier.dart';
 
 class ProductPage extends ConsumerWidget {
   const ProductPage({super.key, required this.product});
