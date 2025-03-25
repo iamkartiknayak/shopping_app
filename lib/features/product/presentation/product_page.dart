@@ -5,10 +5,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
 import 'package:shopping_app/core/constants.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:shopping_app/features/catalogue/data/models/product_model.dart';
 import 'package:shopping_app/features/product/presentation/widgets/image_slider.dart';
 import 'package:shopping_app/features/product/application/image_slider_notifier.dart';
+import 'package:shopping_app/features/product/presentation/widgets/image_index_indicator.dart';
 
 class ProductPage extends ConsumerWidget {
   const ProductPage({super.key, required this.product});
@@ -31,19 +31,7 @@ class ProductPage extends ConsumerWidget {
         children: [
           ImageSlider(product: product, sliderNotifier: sliderNotifier),
           if (product.images.length > 1)
-            Container(
-              alignment: Alignment.center,
-              margin: EdgeInsets.only(top: 4.0),
-              child: AnimatedSmoothIndicator(
-                activeIndex: currentIndex,
-                count: product.images.length,
-                effect: ExpandingDotsEffect(
-                  dotWidth: 8.0,
-                  dotHeight: 8.0,
-                  activeDotColor: kAccentColor,
-                ),
-              ),
-            ),
+            ImageIndexIndicator(currentIndex: currentIndex, product: product),
           SizedBox(height: 20.0),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 12.0),
