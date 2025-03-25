@@ -57,7 +57,10 @@ class _CataloguePageState extends ConsumerState<CataloguePage> {
                 },
               ),
           loading: () => _buildShimmerItems(),
-          error: (e, stack) => Center(child: Text("Error: $e")),
+          error: (e, stack) {
+            Center(child: Text("Error: $e"));
+            return _buildShimmerItems();
+          },
         ),
       ),
     );
