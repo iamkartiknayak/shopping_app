@@ -18,7 +18,11 @@ class CartPage extends ConsumerWidget {
 
     return Scaffold(
       backgroundColor: kBackgroundColor,
-      appBar: AppBar(title: Text("Cart"), centerTitle: true),
+      appBar: AppBar(
+        backgroundColor: kBackgroundColor,
+        title: Text("Cart"),
+        centerTitle: true,
+      ),
       body: Stack(
         alignment: Alignment.bottomCenter,
         children: [

@@ -21,6 +21,7 @@ class _CataloguePageState extends ConsumerState<CataloguePage> {
     return Scaffold(
       backgroundColor: kBackgroundColor,
       appBar: AppBar(
+        backgroundColor: kBackgroundColor,
         title: Text("Catalogue"),
         centerTitle: true,
         actions: [
