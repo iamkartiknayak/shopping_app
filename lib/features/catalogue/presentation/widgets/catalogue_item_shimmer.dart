@@ -1,4 +1,7 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 
 import 'package:shopping_app/core/constants.dart';
 
@@ -10,7 +13,6 @@ class CatalogueItemShimmer extends StatelessWidget {
     return Container(
       height: 280,
       color: Colors.white,
-      margin: EdgeInsets.only(bottom: 8.0),
       child: Column(
         children: [
           ContentSkeleton(height: 180.0, borderRadius: 0.0),
@@ -56,13 +58,18 @@ class ContentSkeleton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: kShimmerChildrenColor,
-        borderRadius: BorderRadius.circular(borderRadius),
+    return Shimmer.fromColors(
+      baseColor: kShimmerChildrenColor.withOpacity(0.6),
+      highlightColor: kShimmerChildrenColor.withOpacity(0.3),
+      period: const Duration(milliseconds: 1200),
+      child: Container(
+        decoration: BoxDecoration(
+          color: kShimmerChildrenColor,
+          borderRadius: BorderRadius.circular(borderRadius),
+        ),
+        height: height,
+        width: width,
       ),
-      height: height,
-      width: width,
     );
   }
 }
