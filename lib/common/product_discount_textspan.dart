@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:shopping_app/core/constants.dart';
+
 class ProductDiscountTextSpan extends StatelessWidget {
   const ProductDiscountTextSpan({super.key, required this.discountPercentage});
 
@@ -10,7 +12,7 @@ class ProductDiscountTextSpan extends StatelessWidget {
     return RichText(
       textAlign: TextAlign.start,
       text: TextSpan(
-        style: TextStyle(color: Colors.pink),
+        style: TextStyle(color: kAccentColor),
         children: [
           TextSpan(
             text: '$discountPercentage% ',

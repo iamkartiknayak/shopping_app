@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'package:shopping_app/core/constants.dart';
 import 'package:shopping_app/features/catalogue/presentation/catalogue_page.dart';
 
 void main() {
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       title: 'Shopping App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.pink.shade300),
+        colorScheme: ColorScheme.fromSeed(seedColor: kAccentColor),
       ),
       // darkTheme: ThemeData.dark(),
       home: CataloguePage(),

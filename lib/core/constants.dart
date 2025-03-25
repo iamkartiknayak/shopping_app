@@ -17,3 +17,5 @@ final kProductDiscountedPriceStyle = TextStyle(
   fontSize: 14.0,
   fontWeight: FontWeight.bold,
 );
+
+final kAccentColor = Color(0xFFE91E63);

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:shopping_app/core/constants.dart';
+
 class AddToCartButton extends StatelessWidget {
   const AddToCartButton({super.key, required this.onTap});
 
@@ -24,7 +26,7 @@ class AddToCartButton extends StatelessWidget {
               child: Text(
                 'Add',
                 style: TextStyle(
-                  color: Colors.pink,
+                  color: kAccentColor,
                   fontSize: 13.0,
                   fontWeight: FontWeight.bold,
                 ),

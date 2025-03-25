@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:shopping_app/core/constants.dart';
 import 'package:shopping_app/features/cart/application/cart_notifier.dart';
 
 class CartSummaryWidget extends StatelessWidget {
@@ -33,7 +34,7 @@ class CartSummaryWidget extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12.0),
-              color: Colors.pink,
+              color: kAccentColor,
             ),
             padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 14.0),
             child: Row(
@@ -55,7 +56,7 @@ class CartSummaryWidget extends StatelessWidget {
                   child: Text(
                     "${cartNotifier.totalQuantity}",
                     style: TextStyle(
-                      color: Colors.pink,
+                      color: kAccentColor,
                       fontSize: 12.0,
                       fontWeight: FontWeight.bold,
                     ),

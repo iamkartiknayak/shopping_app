@@ -79,7 +79,7 @@ class CartPage extends ConsumerWidget {
                                     ),
                                     Text(
                                       '$quantity',
-                                      style: TextStyle(color: Colors.pink),
+                                      style: TextStyle(color: kAccentColor),
                                     ),
                                     QuantityIconButton(
                                       icon: Icons.add,
