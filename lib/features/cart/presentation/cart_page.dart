@@ -1,21 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:shopping_app/common/product_discount_textspan.dart';
 import 'package:shopping_app/common/product_price_textspan.dart';
 import 'package:shopping_app/core/constants.dart';
+import 'package:shopping_app/features/cart/application/cart_notifier.dart';
 import 'package:shopping_app/features/cart/presentation/widgets/quantity_icon_button.dart';
 
-class CartPage extends StatelessWidget {
+class CartPage extends ConsumerWidget {
   const CartPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final cartItems = ref.watch(cartProvider);
+    final cartNotifier = ref.read(cartProvider.notifier);
+
     return Scaffold(
       backgroundColor: Color(0xFFFFEBEE),
       appBar: AppBar(title: Text("Cart"), centerTitle: true),
       body: ListView.builder(
-        itemCount: 3,
+        itemCount: cartItems.length,
         itemBuilder: (context, index) {
+          final product = cartItems.keys.elementAt(index);
+          final quantity = cartItems[product]!;
           return Container(
             color: Colors.white,
             margin: EdgeInsets.only(bottom: 8.0),
@@ -23,7 +30,7 @@ class CartPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Image.network(
-                  "https://cdn.dummyjson.com/products/images/groceries/Honey%20Jar/thumbnail.png",
+                  product.thumbnail,
                   fit: BoxFit.contain,
                   height: 160.0,
                 ),
@@ -32,16 +39,18 @@ class CartPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(height: 12.0),
-                      Text('Honey jar', style: kProductTitleStyle),
+                      Text(product.title, style: kProductTitleStyle),
                       SizedBox(height: 2.0),
-                      Text('Some Brand', style: TextStyle(fontSize: 12.0)),
+                      Text(product.brand, style: TextStyle(fontSize: 12.0)),
                       SizedBox(height: 8.0),
                       ProductPriceTextSpan(
-                        originalPrice: 9.99,
-                        discountedPrice: 9.12,
+                        originalPrice: product.price,
+                        discountedPrice: product.discountedPrice,
                       ),
                       SizedBox(height: 4.0),
-                      ProductDiscountTextSpan(discountPercentage: 1.12),
+                      ProductDiscountTextSpan(
+                        discountPercentage: product.discountPercentage,
+                      ),
                       SizedBox(height: 14.0),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
@@ -58,12 +67,17 @@ class CartPage extends StatelessWidget {
                               children: [
                                 QuantityIconButton(
                                   icon: Icons.remove,
-                                  onTap: () {},
+                                  onTap:
+                                      () =>
+                                          cartNotifier.removeFromCart(product),
                                 ),
-                                Text('2', style: TextStyle(color: Colors.pink)),
+                                Text(
+                                  '$quantity',
+                                  style: TextStyle(color: Colors.pink),
+                                ),
                                 QuantityIconButton(
                                   icon: Icons.add,
-                                  onTap: () {},
+                                  onTap: () => cartNotifier.addToCart(product),
                                 ),
                               ],
                             ),
