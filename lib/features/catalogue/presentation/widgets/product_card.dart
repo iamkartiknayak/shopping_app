@@ -30,7 +30,25 @@ class ProductCard extends ConsumerWidget {
                 onTap: () {
                   ref.read(cartProvider.notifier).addToCart(product);
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text("${product.title} added to cart!")),
+                    SnackBar(
+                      duration: Duration(seconds: 2),
+                      backgroundColor: kBackgroundColor,
+                      content: Text.rich(
+                        TextSpan(
+                          text: product.title,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                          children: [
+                            TextSpan(
+                              text: " added to cart!",
+                              style: TextStyle(fontWeight: FontWeight.normal),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   );
                 },
               ),
