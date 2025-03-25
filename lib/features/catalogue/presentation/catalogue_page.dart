@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'package:shopping_app/features/cart/presentation/cart_page.dart';
 import 'package:shopping_app/features/catalogue/application/product_notifier.dart';
 import 'package:shopping_app/features/catalogue/presentation/widgets/product_card.dart';
 
@@ -23,7 +24,11 @@ class _CataloguePageState extends ConsumerState<CataloguePage> {
         centerTitle: true,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed:
+                () => Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => CartPage()),
+                ),
             icon: Icon(Icons.shopping_cart_outlined),
           ),
         ],
