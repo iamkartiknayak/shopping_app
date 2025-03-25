@@ -3,8 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:shopping_app/core/constants.dart';
 import 'package:shopping_app/features/cart/application/cart_notifier.dart';
-import 'package:shopping_app/features/cart/presentation/cart_page.dart';
 import 'package:shopping_app/features/catalogue/application/product_notifier.dart';
+import 'package:shopping_app/features/catalogue/presentation/widgets/cart_button.dart';
 import 'package:shopping_app/features/catalogue/presentation/widgets/product_card.dart';
 
 class CataloguePage extends ConsumerStatefulWidget {
@@ -26,40 +26,7 @@ class _CataloguePageState extends ConsumerState<CataloguePage> {
         backgroundColor: kBackgroundColor,
         title: Text("Catalogue"),
         centerTitle: true,
-        actions: [
-          Stack(
-            children: [
-              IconButton(
-                onPressed:
-                    () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => CartPage()),
-                    ),
-                icon: Icon(Icons.shopping_cart_outlined, size: 28.0),
-              ),
-              Positioned(
-                top: 2.0,
-                right: 8.0,
-                child: IgnorePointer(
-                  child: Container(
-                    height: 20.0,
-                    width: 20.0,
-                    decoration: BoxDecoration(
-                      color: kAccentColor,
-                      shape: BoxShape.circle,
-                    ),
-                    padding: EdgeInsets.all(2.0),
-                    child: Text(
-                      "${cartItems.length}",
-                      style: TextStyle(color: Colors.white, fontSize: 10.0),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ],
+        actions: [CartButton(cartItems: cartItems)],
       ),
       body: NotificationListener<ScrollNotification>(
         onNotification: (scrollInfo) {
