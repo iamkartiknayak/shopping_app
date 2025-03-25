@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../data/models/product_model.dart';
-import '../data/repositories/product_repository.dart';
-import '../../../core/api_service.dart';
+
+import 'package:shopping_app/core/api_service.dart';
+import 'package:shopping_app/features/catalogue/data/models/product_model.dart';
+import 'package:shopping_app/features/catalogue/data/repositories/product_repository.dart';
 
 final apiServiceProvider = Provider((ref) => ApiService());
 
