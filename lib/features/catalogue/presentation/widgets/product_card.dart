@@ -1,9 +1,7 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:shimmer/shimmer.dart';
 
+import 'package:shopping_app/common/image_shimmer.dart';
 import 'package:shopping_app/common/product_discount_textspan.dart';
 import 'package:shopping_app/common/product_price_textspan.dart';
 import 'package:shopping_app/core/constants.dart';
@@ -40,12 +38,7 @@ class ProductCard extends ConsumerWidget {
 
                   loadingBuilder: (context, child, loadingProgress) {
                     if (loadingProgress == null) return child;
-                    return Shimmer.fromColors(
-                      period: Duration(milliseconds: 800),
-                      baseColor: kShimmerChildrenColor.withOpacity(0.6),
-                      highlightColor: kShimmerChildrenColor.withOpacity(0.3),
-                      child: Container(color: Colors.grey, height: 180.0),
-                    );
+                    return ImageShimmer(iconSize: 80.0);
                   },
                 ),
                 AddToCartButton(
