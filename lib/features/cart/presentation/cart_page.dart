@@ -47,7 +47,7 @@ class CartPage extends ConsumerWidget {
                   ),
                   SizedBox(height: 4.0),
                   Text(
-                    'Add something make me happy :)',
+                    'Add something to make me happy :)',
                     style: TextStyle(
                       color: Colors.grey.shade600,
                       fontSize: 13.0,
