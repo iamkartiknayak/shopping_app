@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
+import 'package:shopping_app/common/image_shimmer.dart';
+
 import 'package:shopping_app/core/constants.dart';
 
 class CatalogueItemShimmer extends StatelessWidget {
@@ -15,7 +17,7 @@ class CatalogueItemShimmer extends StatelessWidget {
       color: Colors.white,
       child: Column(
         children: [
-          ContentSkeleton(height: 180.0, borderRadius: 0.0),
+          ImageShimmer(iconSize: 80.0),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 10.0),
             child: Column(
